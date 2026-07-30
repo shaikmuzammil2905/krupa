@@ -457,7 +457,7 @@ button, input, select, textarea {
 /* HERO SECTION */
 .hero-section {
   position: relative;
-  padding: 3.5rem 0 5rem 0;
+  padding: 3rem 0 2.5rem 0;
   background: linear-gradient(180deg, #F5FAF7 0%, #FFFFFF 100%);
   overflow: hidden;
 }
@@ -657,7 +657,7 @@ button, input, select, textarea {
 
 /* SERVICES GRID SECTION */
 .services-section {
-  padding: 5rem 0;
+  padding: 2.5rem 0 4rem 0;
   background-color: #FFFFFF;
 }
 
@@ -1831,6 +1831,15 @@ button, input, select, textarea {
   .container {
     padding: 0 1rem;
   }
+  .hero-section {
+    padding: 1.5rem 0 0.75rem 0;
+  }
+  .services-section {
+    padding: 0.75rem 0 2.5rem 0;
+  }
+  .section-header {
+    margin: 0 auto 1.25rem auto;
+  }
   .brand-logo img {
     height: 42px;
     max-width: 175px;
@@ -1859,7 +1868,7 @@ button, input, select, textarea {
     left: auto;
     right: auto;
     bottom: auto;
-    margin: 1.25rem auto 0 auto;
+    margin: 0.75rem auto 0 auto;
     width: 100%;
     max-width: 320px;
     justify-content: center;
