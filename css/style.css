@@ -1921,3 +1921,441 @@ button, input, select, textarea {
     width: 100%;
   }
 }
+
+/* ==========================================================================
+   PORTFOLIO, FOUNDER GRAND BOX, LOGO BLEND & INSTAGRAM STYLES
+   ========================================================================== */
+
+/* 1. Logo Blending & Header/Footer Adjustments */
+.brand-logo img, .drawer-logo {
+  height: 58px;
+  max-width: 280px;
+  width: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.05));
+  transition: transform 0.25s ease;
+}
+
+.footer-brand img {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+/* Instagram Header & Footer Badges */
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #E1306C;
+  font-weight: 700;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.instagram-link:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.instagram-icon-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 6px;
+  vertical-align: middle;
+}
+
+/* Top bar Instagram CTA */
+.top-bar-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 0.85rem;
+  border-radius: 30px;
+  box-shadow: 0 2px 8px rgba(225, 48, 108, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.top-bar-instagram:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
+}
+
+/* 2. GRAND FOUNDER SHOWCASE BOX */
+.founder-showcase-section {
+  padding: 4rem 0 6rem 0;
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-subtle) 100%);
+}
+
+.founder-grand-box {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(11, 122, 62, 0.15);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+.founder-grand-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+}
+
+.founder-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+
+.founder-img-wrapper {
+  position: relative;
+  background: var(--dark-heading);
+  min-height: 480px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.founder-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+
+.founder-grand-box:hover .founder-img-wrapper img {
+  transform: scale(1.03);
+}
+
+.founder-badge-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  background: rgba(18, 33, 24, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.founder-badge-overlay i {
+  font-size: 2.2rem;
+  color: var(--accent);
+}
+
+.founder-badge-overlay .title-text h5 {
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  margin-bottom: 0.15rem;
+}
+
+.founder-badge-overlay .title-text span {
+  font-size: 0.85rem;
+  color: #C0D6C9;
+}
+
+.founder-content-wrapper {
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.founder-header-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-bg);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1rem;
+  width: fit-content;
+  border: 1px solid rgba(247, 147, 30, 0.2);
+}
+
+.founder-name {
+  font-size: 2.75rem;
+  color: var(--dark-heading);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+
+.founder-role {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.founder-quote {
+  background: var(--primary-bg);
+  border-left: 4px solid var(--primary);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom: 1.75rem;
+  font-style: italic;
+  color: var(--dark-heading);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.founder-bio p {
+  margin-bottom: 1.25rem;
+  font-size: 1.025rem;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+.founder-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.highlight-pill {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.highlight-pill h4 {
+  color: var(--primary);
+  font-size: 1.35rem;
+  margin-bottom: 0.15rem;
+}
+
+.highlight-pill span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* 3. PORTFOLIO SHOWCASE & RESPONSIVE CARD BOXES */
+.portfolio-section {
+  padding: 4rem 0 6rem 0;
+  background: #FFFFFF;
+}
+
+.portfolio-filter-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.portfolio-filter-btn {
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-color);
+  background: #FFFFFF;
+  color: var(--dark-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.portfolio-filter-btn:hover,
+.portfolio-filter-btn.active {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+  box-shadow: 0 6px 18px rgba(11, 122, 62, 0.25);
+}
+
+.portfolio-grid-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.portfolio-card-box {
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card-box:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(11, 122, 62, 0.3);
+}
+
+.portfolio-card-media {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: #F0F4F2;
+}
+
+.portfolio-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-card-box:hover .portfolio-card-media img {
+  transform: scale(1.08);
+}
+
+.portfolio-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 122, 62, 0.1) 0%, rgba(18, 33, 24, 0.85) 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+.portfolio-card-box:hover .portfolio-card-overlay {
+  opacity: 1;
+}
+
+.portfolio-card-zoom-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  align-self: flex-end;
+  box-shadow: 0 4px 15px rgba(247, 147, 30, 0.4);
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+
+.portfolio-card-box:hover .portfolio-card-zoom-btn {
+  transform: scale(1);
+}
+
+.portfolio-card-info {
+  color: #FFFFFF;
+}
+
+.portfolio-card-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--primary);
+  color: #FFFFFF;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-card-title {
+  color: #FFFFFF;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.portfolio-card-caption {
+  padding: 1.25rem 1.5rem;
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.portfolio-card-caption h4 {
+  font-size: 1.05rem;
+  color: var(--dark-heading);
+}
+
+.portfolio-card-caption span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Media Queries for Grand Founder & Portfolio */
+@media (max-width: 992px) {
+  .founder-grid {
+    grid-template-columns: 1fr;
+  }
+  .founder-img-wrapper {
+    min-height: 380px;
+  }
+  .founder-content-wrapper {
+    padding: 2.5rem 2rem;
+  }
+  .portfolio-grid-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .founder-name {
+    font-size: 2.1rem;
+  }
+  .founder-highlights {
+    grid-template-columns: 1fr;
+  }
+  .portfolio-grid-box {
+    grid-template-columns: 1fr;
+  }
+  .portfolio-card-media {
+    height: 240px;
+  }
+}
+

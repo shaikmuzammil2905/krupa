@@ -182,11 +182,11 @@ function initMapRedirect() {
 }
 
 /* ==========================================
-   7. GALLERY MASONRY FILTER
+   7. GALLERY & PORTFOLIO FILTER
    ========================================== */
 function initGalleryFilter() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const galleryItems = document.querySelectorAll('.gallery-item');
+  const filterBtns = document.querySelectorAll('.filter-btn, .portfolio-filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item, .portfolio-card-box');
   if (!filterBtns.length || !galleryItems.length) return;
 
   filterBtns.forEach(btn => {
@@ -198,7 +198,7 @@ function initGalleryFilter() {
 
       galleryItems.forEach(item => {
         if (filter === 'all' || item.classList.contains(filter)) {
-          item.style.display = 'block';
+          item.style.display = 'flex';
           setTimeout(() => item.style.opacity = '1', 50);
         } else {
           item.style.opacity = '0';
