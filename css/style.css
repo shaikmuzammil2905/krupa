@@ -1944,17 +1944,17 @@ button, input, select, textarea {
 }
 
 .footer-brand img {
-  height: 75px;
-  max-height: 82px;
+  height: 80px;
+  max-height: 90px;
   width: auto;
   object-fit: contain;
   margin-bottom: 1.25rem;
   background: #FFFFFF;
-  padding: 8px 18px;
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  padding: 10px 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
   display: inline-block;
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
