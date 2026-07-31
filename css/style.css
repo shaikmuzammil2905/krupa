@@ -266,7 +266,6 @@ button, input, select, textarea {
   max-width: 340px;
   width: auto;
   object-fit: contain;
-  mix-blend-mode: multiply;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08));
   transition: transform 0.2s ease;
   background: transparent;
@@ -1929,14 +1928,13 @@ button, input, select, textarea {
    PORTFOLIO, FOUNDER GRAND BOX, LOGO BLEND & INSTAGRAM STYLES
    ========================================================================== */
 
-/* 1. Logo Patch Removal & Contrast Adjustments */
+/* 1. Transparent Logo & Contrast Adjustments */
 .brand-logo img, .drawer-logo {
   height: 80px;
   max-height: 90px;
   max-width: 320px;
   width: auto;
   object-fit: contain;
-  mix-blend-mode: multiply;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08));
   transition: transform 0.25s ease;
   background: transparent;
