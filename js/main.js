@@ -160,9 +160,9 @@ function initFormValidation() {
       const targetPhoneNumber = "9980550889";
       const waUrl = `https://wa.me/91${targetPhoneNumber}?text=${waMessage}`;
 
-      // Alert feedback and redirect to WhatsApp
-      alert(`Thank you ${name}! Your inquiry details are ready. Redirecting to Krupa Packers and Movers WhatsApp (+91 9980550889)...`);
-      window.open(waUrl, '_blank');
+      // Alert feedback and reset form
+      alert(`Thank you ${name}! Your inquiry has been submitted successfully. Our team (+91 9980550889) will contact you shortly.`);
+      form.reset();
     });
   });
 }
