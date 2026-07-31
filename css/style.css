@@ -2357,7 +2357,8 @@ button, input, select, textarea {
     gap: 1.25rem;
   }
   .brand-logo img {
-    height: 70px;
+    height: 80px !important;
+    max-height: 90px !important;
   }
 }
 
@@ -2415,9 +2416,10 @@ button, input, select, textarea {
     height: 230px !important;
   }
 
-  .brand-logo img {
-    height: 60px !important;
-    max-height: 65px !important;
+  /* Match desktop view logo height (80px) on mobile view */
+  .brand-logo img, .drawer-logo {
+    height: 80px !important;
+    max-height: 90px !important;
   }
 
   .site-footer {
@@ -2435,8 +2437,10 @@ button, input, select, textarea {
 }
 
 @media (max-width: 480px) {
-  .brand-logo img {
-    height: 52px !important;
+  /* Match desktop view logo height (80px) on small smartphone view */
+  .brand-logo img, .drawer-logo {
+    height: 80px !important;
+    max-height: 90px !important;
   }
 
   .portfolio-card-media {
