@@ -1,6 +1,7 @@
 /**
  * KRUPA PACKERS AND MOVERS - MAIN JAVASCRIPT LOGIC
- * Features: Mobile drawer, scroll reveal, typing counters, WhatsApp form redirect to 9980550889,
+ * Features: Mobile drawer, scroll reveal animations, counting mode numerical counters,
+ * WhatsApp form redirect to 9980550889, interactive Quick Quote Popup Modal,
  * map click redirect to https://share.google/WldTOL7KFivmlS1wM, gallery filter, testimonial slider.
  */
 
@@ -8,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileDrawer();
   initCounters();
   initScrollAnimations();
+  initQuickQuoteModal();
   initTestimonialSlider();
   initFormValidation();
   initMapRedirect();
@@ -46,41 +48,73 @@ function initMobileDrawer() {
 }
 
 /* ==========================================
-   2. NUMERICAL COUNTER & TYPING ANIMATION
+   2. NUMERICAL COUNTER & ANIMATED COUNTING MODE
    ========================================== */
 function initCounters() {
   const statNumbers = document.querySelectorAll('.stat-number');
   if (!statNumbers.length) return;
 
-  let hasAnimated = false;
+  function animateCounter(counter) {
+    const target = parseInt(counter.getAttribute('data-target') || counter.innerText.replace(/[^0-9]/g, '')) || 0;
+    const suffix = counter.getAttribute('data-suffix') || '+';
+    const prefix = counter.getAttribute('data-prefix') || '';
+    const duration = 2200; // 2.2 seconds total animation time
+    const startTime = performance.now();
 
-  const observer = new IntersectionObserver((entries) => {
+    function updateNumber(currentTime) {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      
+      // Ease out cubic function for smooth decelerating count
+      const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+      const currentVal = Math.floor(easeOutProgress * target);
+
+      // Format number with commas (e.g., 10,000)
+      const formattedVal = currentVal.toLocaleString('en-IN');
+      counter.innerText = prefix + formattedVal + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateNumber);
+      } else {
+        counter.innerText = prefix + target.toLocaleString('en-IN') + suffix;
+      }
+    }
+
+    requestAnimationFrame(updateNumber);
+  }
+
+  const observerOptions = {
+    threshold: 0.25,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting && !hasAnimated) {
-        hasAnimated = true;
-        statNumbers.forEach(counter => {
-          const target = parseInt(counter.getAttribute('data-target') || counter.innerText);
-          const suffix = counter.getAttribute('data-suffix') || '+';
-          let count = 0;
-          const duration = 2000;
-          const stepTime = Math.abs(Math.floor(duration / target));
-
-          const timer = setInterval(() => {
-            count += Math.ceil(target / 40);
-            if (count >= target) {
-              counter.innerText = target + suffix;
-              clearInterval(timer);
-            } else {
-              counter.innerText = count + suffix;
-            }
-          }, stepTime > 30 ? stepTime : 30);
-        });
+      if (entry.isIntersecting) {
+        const counters = entry.target.querySelectorAll('.stat-number');
+        counters.forEach(c => animateCounter(c));
+        obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.3 });
+  }, observerOptions);
 
-  const achievementsSection = document.querySelector('.achievements-section');
-  if (achievementsSection) observer.observe(achievementsSection);
+  const achievementsSections = document.querySelectorAll('.achievements-section, .stats-section, .about-highlights-wrapper');
+  if (achievementsSections.length) {
+    achievementsSections.forEach(section => observer.observe(section));
+  } else {
+    // Fallback: observe counter elements directly
+    statNumbers.forEach(c => {
+      const singleObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      singleObserver.observe(c);
+    });
+  }
 }
 
 /* ==========================================
@@ -96,13 +130,95 @@ function initScrollAnimations() {
         entry.target.classList.add('in-view');
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
   animatedElements.forEach(el => observer.observe(el));
 }
 
 /* ==========================================
-   4. TESTIMONIAL CAROUSEL SLIDER
+   4. INTERACTIVE QUICK QUOTE POPUP MODAL
+   ========================================== */
+function initQuickQuoteModal() {
+  const modal = document.querySelector('.quote-modal');
+  if (!modal) return;
+
+  const closeBtn = modal.querySelector('.quote-modal-close');
+  const triggerBtns = document.querySelectorAll('[data-open-quote], .btn-open-quote, .floating-quote-btn');
+  const form = modal.querySelector('.quick-quote-modal-form');
+
+  function openModal() {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  triggerBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Automatic popup trigger after 5 seconds on initial session visit
+  if (!sessionStorage.getItem('krupa_quote_popup_shown')) {
+    setTimeout(() => {
+      if (!modal.classList.contains('active')) {
+        openModal();
+        sessionStorage.setItem('krupa_quote_popup_shown', 'true');
+      }
+    }, 4500);
+  }
+
+  // Handle Popup Form Submission directly to WhatsApp
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = form.querySelector('[name="popup_name"]')?.value || 'Valued Customer';
+      const phone = form.querySelector('[name="popup_phone"]')?.value || '';
+      const service = form.querySelector('[name="popup_service"]')?.value || 'Relocation';
+      const from = form.querySelector('[name="popup_from"]')?.value || '';
+      const to = form.querySelector('[name="popup_to"]')?.value || '';
+
+      let waMessage = `*Quick Quote Request - Krupa Packers & Movers*%0A`;
+      waMessage += `*Name:* ${encodeURIComponent(name)}%0A`;
+      waMessage += `*Phone:* ${encodeURIComponent(phone)}%0A`;
+      waMessage += `*Service:* ${encodeURIComponent(service)}%0A`;
+      if (from) waMessage += `*From:* ${encodeURIComponent(from)}%0A`;
+      if (to) waMessage += `*To:* ${encodeURIComponent(to)}%0A`;
+      waMessage += `*Status:* Urgent Quote Requested via Web Popup`;
+
+      const targetPhoneNumber = "9980550889";
+      const waUrl = `https://wa.me/91${targetPhoneNumber}?text=${waMessage}`;
+
+      closeModal();
+      window.open(waUrl, '_blank');
+      form.reset();
+    });
+  }
+}
+
+/* ==========================================
+   5. TESTIMONIAL CAROUSEL SLIDER
    ========================================== */
 function initTestimonialSlider() {
   const track = document.querySelector('.testimonial-track');
@@ -130,7 +246,7 @@ function initTestimonialSlider() {
 }
 
 /* ==========================================
-   5. CONTACT & INQUIRY FORM VALIDATION
+   6. CONTACT & INQUIRY FORM VALIDATION
    Redirects directly to WhatsApp (9980550889)
    ========================================== */
 function initFormValidation() {
@@ -160,15 +276,14 @@ function initFormValidation() {
       const targetPhoneNumber = "9980550889";
       const waUrl = `https://wa.me/91${targetPhoneNumber}?text=${waMessage}`;
 
-      // Alert feedback and reset form
-      alert(`Thank you ${name}! Your inquiry has been submitted successfully. Our team (+91 9980550889) will contact you shortly.`);
+      window.open(waUrl, '_blank');
       form.reset();
     });
   });
 }
 
 /* ==========================================
-   6. INTERACTIVE MAP SECTION REDIRECT
+   7. INTERACTIVE MAP SECTION REDIRECT
    ========================================== */
 function initMapRedirect() {
   const mapContainers = document.querySelectorAll('.map-container');
@@ -182,7 +297,7 @@ function initMapRedirect() {
 }
 
 /* ==========================================
-   7. GALLERY & PORTFOLIO FILTER
+   8. GALLERY & PORTFOLIO FILTER
    ========================================== */
 function initGalleryFilter() {
   const filterBtns = document.querySelectorAll('.filter-btn, .portfolio-filter-btn');
@@ -210,7 +325,7 @@ function initGalleryFilter() {
 }
 
 /* ==========================================
-   8. LIGHTBOX MODAL
+   9. LIGHTBOX MODAL
    ========================================== */
 function initLightbox() {
   const modal = document.querySelector('.lightbox-modal');
@@ -240,7 +355,7 @@ function initLightbox() {
 }
 
 /* ==========================================
-   9. VIDEO MODAL POPUP
+   10. VIDEO MODAL POPUP
    ========================================== */
 function initVideoModal() {
   const videoModal = document.querySelector('.video-modal');
@@ -265,7 +380,7 @@ function initVideoModal() {
 }
 
 /* ==========================================
-   10. BACK TO TOP BUTTON
+   11. BACK TO TOP BUTTON
    ========================================== */
 function initBackToTop() {
   const backBtn = document.querySelector('.back-to-top');
@@ -283,3 +398,4 @@ function initBackToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+

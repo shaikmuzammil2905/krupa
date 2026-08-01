@@ -265,6 +265,63 @@
   <a href="tel:9980550889" class="floating-call"><i class="fa-solid fa-phone"></i></a>
   <button class="back-to-top"><i class="fa-solid fa-arrow-up"></i></button>
 
+  <!-- INTERACTIVE QUICK QUOTE POPUP MODAL -->
+  <div class="quote-modal" id="quickQuoteModal" aria-hidden="true">
+    <div class="quote-modal-content">
+      <button class="quote-modal-close" aria-label="Close modal">&times;</button>
+      <div class="quote-modal-header">
+        <div class="quote-modal-badge">
+          <i class="fa-solid fa-bolt"></i> Instant Estimate
+        </div>
+        <h3 class="quote-modal-title">Get Free Moving Quote</h3>
+        <p class="quote-modal-desc">Fill in details below for fast pricing & instant WhatsApp booking assistance.</p>
+      </div>
+
+      <form class="quick-quote-modal-form">
+        <div class="quote-form-group">
+          <label><i class="fa-solid fa-user"></i> Full Name</label>
+          <input type="text" name="popup_name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="quote-form-group">
+          <label><i class="fa-solid fa-phone"></i> Mobile / WhatsApp Number</label>
+          <input type="tel" name="popup_phone" placeholder="e.g. 9980550889" required>
+        </div>
+
+        <div class="quote-form-group">
+          <label><i class="fa-solid fa-truck-moving"></i> Service Required</label>
+          <select name="popup_service" required>
+            <option value="House Shifting">House Shifting</option>
+            <option value="Office Relocation">Office Relocation</option>
+            <option value="Commercial Shifting">Commercial Moving</option>
+            <option value="Car / Bike Transport">Car / Bike Transport</option>
+            <option value="Packing & Storage">Packing & Storage</option>
+          </select>
+        </div>
+
+        <div class="quote-form-row">
+          <div class="quote-form-group">
+            <label><i class="fa-solid fa-location-dot"></i> Moving From</label>
+            <input type="text" name="popup_from" placeholder="Current City / Area" required>
+          </div>
+          <div class="quote-form-group">
+            <label><i class="fa-solid fa-location-arrow"></i> Moving To</label>
+            <input type="text" name="popup_to" placeholder="Destination City" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-modal-submit">
+          <i class="fa-brands fa-whatsapp"></i> Get Instant Quote on WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FLOATING QUICK QUOTE BUTTON -->
+  <button class="floating-quote-btn pulse-glow" data-open-quote aria-label="Get Quick Quote">
+    <i class="fa-solid fa-calculator"></i> Quick Quote
+  </button>
+
   <!-- STICKY MOBILE BOTTOM NAVIGATION BAR -->
   <div class="mobile-bottom-nav">
     <div class="nav-grid">
@@ -272,10 +329,11 @@
       <a href="portfolio.html" class="mobile-nav-item"><i class="fa-solid fa-images"></i><span>Portfolio</span></a>
       <a href="tel:9980550889" class="mobile-nav-item"><i class="fa-solid fa-phone"></i><span>Call</span></a>
       <a href="https://wa.me/919980550889" target="_blank" class="mobile-nav-item"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
-      <a href="contact.html" class="mobile-nav-item"><i class="fa-solid fa-calculator"></i><span>Quote</span></a>
+      <button class="mobile-nav-item" data-open-quote style="background:none; border:none; cursor:pointer; font-family:inherit;"><i class="fa-solid fa-calculator"></i><span>Quote</span></button>
     </div>
   </div>
 
   <script src="js/main.js"></script>
 </body>
 </html>
+
